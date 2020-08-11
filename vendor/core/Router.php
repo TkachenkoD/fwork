@@ -29,8 +29,9 @@ class Router{
                     $route["action"] = "index";
                 }
 
-                self::$route = $route;    
-                debug(self::$route);           
+                $route['controller'] = self::toCamelCase($route['controller']);    
+                self::$route = $route;
+                // debug(self::$route);           
                 return true;
             }
         }
@@ -40,9 +41,10 @@ class Router{
     
     public static function dispatch($url){
         if(self::matchRoute($url)){
-            $controller = "App\controllers\\".self::toCamelCase(self::$route['controller']);
+            $controller = "App\controllers\\".self::$route['controller'];
+            debug(self::$route);  
             if(class_exists($controller)){
-                $cObj = new $controller;
+                $cObj = new $controller(self::$route);
                 $action = self::toLowCamelCase(self::$route["action"]) ."Action";
                 if(method_exists($cObj, $action)){
                     $cObj->$action();
