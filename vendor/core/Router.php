@@ -29,7 +29,8 @@ class Router{
                     $route["action"] = "index";
                 }
 
-                $route['controller'] = self::toCamelCase($route['controller']);    
+                $route['controller'] = self::toCamelCase($route['controller']); 
+                $route['action'] = self::toLowCamelCase($route['action']); 
                 self::$route = $route;
                 // debug(self::$route);           
                 return true;
@@ -40,14 +41,15 @@ class Router{
 
     
     public static function dispatch($url){
+        $url = self::removeQueryString($url);
         if(self::matchRoute($url)){
-            $controller = "App\controllers\\".self::$route['controller'];
-            debug(self::$route);  
+            $controller = "App\controllers\\".self::$route['controller']."Controller";      
             if(class_exists($controller)){
-                $cObj = new $controller(self::$route);
+                $cObj = new $controller(self::$route); //pass into controller class params about name of controller and name of action method
                 $action = self::toLowCamelCase(self::$route["action"]) ."Action";
                 if(method_exists($cObj, $action)){
-                    $cObj->$action();
+                    $cObj->$action();//call action method
+                    $cObj->getView();//render view
                 }else{
                     echo "the method {$action}() of controller {$controller} not found...";    
                 }
@@ -66,6 +68,21 @@ class Router{
     }
     protected static function toLowCamelCase($name){
         return lcfirst(self::toCamelCase($name));
+    }
+
+    protected static function removeQueryString($url){
+        //separate implicit get parameters from url
+        //[0] param - controller/action, rest - xtra data (avliable in $_GET)
+        //exp: post-new/wtf?page=2&some=here33
+        if($url){
+            $params = explode("&", $url, 2);
+            if(false === strpos($params[0], "=")){
+                debug($params);
+                return rtrim($params[0], "/");
+            }else{
+                return "";
+            }
+        }
     }
 
 
