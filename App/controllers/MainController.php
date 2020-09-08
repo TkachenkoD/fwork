@@ -12,10 +12,9 @@ class MainController extends AppController{
 
         $model = new Main;
         // $res = $model->query("CREATE TABLE posts SELECT * FROM mvc_site.news");
-        // var_dump($res);
+
 
         $posts = $model->findAll();
-        // debug($posts);
 
         /**
          * might be defined on 'action level'
@@ -28,7 +27,7 @@ class MainController extends AppController{
 
         // $this->layout = "main";
         // $this->view = "test";
-        //xtra test commit
+
         $movie = "Boardwalk Empire";
         $episode = "first Episode";
         $this->setVars(compact("movie", "episode", "posts"));
