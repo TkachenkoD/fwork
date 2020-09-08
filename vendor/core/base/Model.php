@@ -8,6 +8,7 @@ abstract class Model{
 
     protected $pdo;
     protected $table;
+    protected $primary_key = 'id'; //primary key of a table
 
     public function __construct(){
 
@@ -22,5 +23,22 @@ abstract class Model{
     public function findAll(){
     $sql = "SELECT * FROM {$this->table}";
     return $this->pdo->query($sql);
+    }
+
+    public function findOne($id, $field = ''){
+        $field = $field ?: $this->primary_key;
+
+        $sql = "SELECT * FROM {$this->table} WHERE {$field} = ? LIMIT 1";
+        return $this->pdo->query($sql, [$id]);
+    }
+
+    public function findBySQL($sql,  $params = []){
+        return $this->pdo->query($sql, $params);
+    }
+
+    public function findLike($str, $field, $table = ''){
+        $table = $table ?: $this->table;
+        $sql = "SELECT * FROM $table WHERE $field LIKE ?";
+        return $this->pdo->query($sql, ['%'.$str.'%']);
     }
 }

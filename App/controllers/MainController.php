@@ -15,6 +15,9 @@ class MainController extends AppController{
 
 
         $posts = $model->findAll();
+        // $post = $model->findOne(2);
+        // $post = $model->findBySQL("SELECT * FROM {$model->table} WHERE title LIKE ?", ['%Ferra%']);
+        // $post = $model->findLike('Ferra', 'title');
 
         /**
          * might be defined on 'action level'
