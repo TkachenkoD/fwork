@@ -28,6 +28,7 @@ class MainController extends AppController{
 
         // $this->layout = "main";
         // $this->view = "test";
+        //xtra test commit
         $movie = "Boardwalk Empire";
         $episode = "first Episode";
         $this->setVars(compact("movie", "episode", "posts"));
