@@ -20,7 +20,7 @@ abstract class Controller{
     }
 
     public function getView(){
-        debug($this->route);
+        // debug($this->route);
         $viewObject = new View($this->route, $this->layout, $this->view);
         $viewObject->render($this->vars);
     }

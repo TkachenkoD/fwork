@@ -13,12 +13,14 @@ class MainController extends AppController{
         $model = new Main;
         // $res = $model->query("CREATE TABLE posts SELECT * FROM mvc_site.news");
 
-
-        $posts = $model->findAll();
+       $posts = \R::findAll('posts');
+       $cat = \R::findAll('category_fw');
+//for redbean php test
+        // $posts = $model->findAll();
         // $post = $model->findOne(2);
         // $post = $model->findBySQL("SELECT * FROM {$model->table} WHERE title LIKE ?", ['%Ferra%']);
         // $post = $model->findLike('Ferra', 'title');
-
+//for redbean php test
         /**
          * might be defined on 'action level'
          * or all 'Class level' - set lauout/view into public class property
@@ -33,7 +35,7 @@ class MainController extends AppController{
 
         $movie = "Boardwalk Empire";
         $episode = "first Episode";
-        $this->setVars(compact("movie", "episode", "posts"));
+        $this->setVars(compact("movie", "episode", "posts", "cat"));
 
     }
     

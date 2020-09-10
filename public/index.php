@@ -7,6 +7,7 @@ define("WWW", __DIR__);
 define("CORE", dirname(__DIR__)."/vendor/core");
 define("ROOT", dirname(__DIR__));
 define("APP", dirname(__DIR__)."/App");
+define("LIBS", dirname(__DIR__).'/vendor/libs');
 define("LAYOUT", "default");
 
 //test commit
@@ -26,6 +27,7 @@ spl_autoload_register(function($class){
 
 // custom rules for paths
 Router::add('^page\b/?(?<alias>[a-z-]+)?$', ["controller" => "Page", "action" => "view"]); //nb for order of rules "pages contains page"
+Router::add('^posts\b/?(?<post_item>[0-9]+)?$', ["controller" => "Posts", "action" => "show"]); //nb for order of rules "pages contains page"
 Router::add('^pages/?(?<action>[a-z-]+)?$', ["controller" => "Posts"]); // NB for controller (it's Posts, but in URl - pages) 
 
 // default rules for paths

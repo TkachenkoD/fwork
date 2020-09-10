@@ -10,36 +10,15 @@
     <link href="/css/main.css" rel="stylesheet">
     <style>
     body{
-        background-color: lightblue;
+        background-color: lightpink;
     }
 
-    .wrapper_test{
-      display: flex;
-      flex-wrap: nowrap;
-      background-color: lightgrey;
-    }
 
-    .wrapper_test > p {
-      background-color: #f1f1f1;
-      margin: 10px;
-      padding: 20px;
-      font-size: 15px;
-    }
-    .top_blck{
-      padding: 20px;
-      /* border: 1px solid #4CAF50; */
-      background-color: #222;
-    }
-    .base_blck{
-      padding: 70px;
-      border: 1px solid #4CAF50;
-      background-color: #FFF;
-    }
     </style>
-    <title>MAIN layout</title>
+    <title>PAGE layout</title>
   </head>
   <body>
-    <h1>MAIN layout</h1>
+    <h1>PAGE layout</h1>
 
 
     <!-- $content - for rendering VIEW -->
